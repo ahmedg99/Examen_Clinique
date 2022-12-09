@@ -2,19 +2,22 @@ package tn.spring.springboot.entities;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.persistence.*;
-import java.util.Set ;
+import java.util.List ;
 
  import java.io.Serializable;
 
 
 @Entity
 @ToString
+
 @Data
 
 public class Medecin implements Serializable {
@@ -30,10 +33,12 @@ public class Medecin implements Serializable {
     private int telephone ;
     private int prixConsultation ;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Clinique> cliniques ;
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "medecins")
+    @JsonIgnore
+    private List<Clinique> cliniques ;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="medecin")
-    private Set<RendezVous> rendezVousSet;
+    @JsonIgnore
+    private List<RendezVous> rendezVousList;
 }

@@ -24,9 +24,13 @@ public class RendezVous implements Serializable {
     private String remaque ;
 
     @ManyToOne
+    @ToString.Exclude
+
     Medecin medecin;
 
     @ManyToOne
+    @ToString.Exclude
+
     Patient patient;
 
 }

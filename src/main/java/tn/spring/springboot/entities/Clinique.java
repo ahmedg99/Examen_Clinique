@@ -1,6 +1,7 @@
 package tn.spring.springboot.entities;
 
 
+  import com.fasterxml.jackson.annotation.JsonIgnore;
   import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+  import java.util.List;
+  import java.util.Set;
 
 @Entity
 @ToString
@@ -25,7 +27,8 @@ public class Clinique implements Serializable {
     private String adresse ;
     private int telephone ;
 
-    @ManyToMany( mappedBy = "cliniques", cascade = CascadeType.ALL)
-    private Set<Medecin> medecins ;
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Medecin> medecins ;
 
 }

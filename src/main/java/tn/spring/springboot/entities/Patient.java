@@ -33,6 +33,7 @@ public class Patient implements Serializable {
     private Date dateNaissance  ;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="patient")
-    private Set<RendezVous> rendezVousSet;
+    @JsonIgnore
+    private List<RendezVous> rendezVousSet;
 
 }
