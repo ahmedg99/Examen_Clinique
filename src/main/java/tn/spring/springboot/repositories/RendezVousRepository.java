@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import tn.spring.springboot.entities.Medecin;
 import tn.spring.springboot.entities.RendezVous;
-import tn.spring.springboot.entities.Specialite;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +26,9 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     @Query("SELECT T FROM RendezVous T WHERE T.dateRDV BETWEEN :startDate AND :endDate and T.medecin.idMedecin=:idmedecin ")
     List<RendezVous> findRendezVousByDateRDVBetweentwodates(Long idmedecin , Date startDate , Date endDate) ;
 
+
+
+    List<RendezVous> findByMedecin(Medecin medecin) ;
 
 
 }

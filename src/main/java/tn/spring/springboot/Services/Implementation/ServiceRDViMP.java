@@ -10,6 +10,7 @@ import tn.spring.springboot.repositories.MedecinRepository;
 import tn.spring.springboot.repositories.PatientRepository;
 import tn.spring.springboot.repositories.RendezVousRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,10 +41,16 @@ public class ServiceRDViMP  implements IServiceRDV {
 
     @Override
     public List<RendezVous> getRendezVousByCliniqueAndSpecialite(Long idClinique, Specialite specialite) {
-        Clinique clinique = cliniqueRepository.findById(idClinique).get() ;
-        return rendezVousRepository.findAll() ;
 
+        List<Medecin> listemed =  medecinRepository.findByCliniquesIdCliniqueAndSpecialite(idClinique,specialite) ;
+        List<RendezVous> listerdv = new ArrayList<RendezVous>();
+        for (int i= 0 ; i<listemed.size() ; i++) {
 
+             listerdv.addAll(rendezVousRepository.findByMedecin( listemed.get(i))) ;
+
+        }
+            System.out.println(listerdv);
+    return  listerdv ;
 
     }
 
@@ -63,29 +70,7 @@ public class ServiceRDViMP  implements IServiceRDV {
   }
 
     }
-/*
-        List<Medecin> liste = medecinRepository.findAll();
 
-        List<Medecin> liste2 = null;
-                for (int i = 0 ; i<liste.size();i++) {
-                    for(int j=0 ; j<liste.get(i).getCliniques().size(); j++) {
-                        if(liste.get(i).getCliniques().get(j).getNomClinique().equals("Taoufik") && (liste.get(i).getSpecialite().equals("Caediologue"))) {
-                            assert liste2 != null;
-                            liste2.add(liste.get(i));
-                        }
-
-                    }
-                }
-
-
-        List<RendezVous> liste3 = null;
-                for (int x= 0 ; x<liste2.size();x++) {
-                    liste3.add((RendezVous) liste2.get(x).getRendezVousList());
-                }
-                return liste3 ;
-
-    }
-    */
 
 
 
