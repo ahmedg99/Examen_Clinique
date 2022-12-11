@@ -2,6 +2,7 @@ package tn.spring.springboot.Services.Implementation;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.spring.springboot.Services.Interfaces.IServiceRDV;
 import tn.spring.springboot.entities.*;
@@ -61,11 +62,13 @@ public class ServiceRDViMP  implements IServiceRDV {
 
     }
 
+//@Scheduled(fixedRate = 3000)
     @Override
     public void retrieveRendezVous() {
+
         List<RendezVous> liste = rendezVousRepository.findRdvAfterSystemDate();
         for(int i=0 ; i< liste.size();i++) {
-            log.info(String.valueOf(liste.get(i)));
+            log.info( "La liste des RDV :   " + liste.get(i).getDateRDV()  + " : Medecin : " + liste.get(i).getMedecin().getNomMedecin() );
         }
   }
 

@@ -31,10 +31,10 @@ public class RendezVousController {
 //getRendezVousByCliniqueAndSpecialite
 
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/getRendezVousByCliniqueAndSpecialite/{idClinique}/{specialite}")
     @ResponseBody
-    public List<RendezVous> getall() {
-        return  iServiceRDV.getRendezVousByCliniqueAndSpecialite(1L, Specialite.valueOf("Caediologue")) ;
+    public List<RendezVous> getRendezVousByCliniqueAndSpecialite(@PathVariable("idClinique") Long idClinique , @PathVariable("specialite") Specialite specialite ) {
+        return  iServiceRDV.getRendezVousByCliniqueAndSpecialite(idClinique,specialite) ;
     }
 
 
@@ -46,9 +46,5 @@ public class RendezVousController {
 
 
 
-    // @Scheduled(fixedRate = 3000)
-    @GetMapping(value = "/retrieveRendezVous")
-    public void retrieveRendezVous() throws ParseException {
-        iServiceRDV.retrieveRendezVous();
-    }
+
 }
